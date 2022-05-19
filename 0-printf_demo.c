@@ -14,12 +14,20 @@ int _printf(const char *format, ...)
 	
 	for (i = 0; format[i] != '\0'; i++)
 	{
+		// Prints characters not associated with format specifiers	
+		if (format[i] != '%' && format[i - 1] != '%')
+		{
+			putchar(format[i]);
+			count++;
+		}
+		//Prints characters
 		if (format[i] == '%' && format[i + 1] == 'c')
 		{
 			charac = va_arg(args, int);
 			putchar(charac);
 			count++;
 		}
+		//Prints strings
 		else if (format[i] == '%' && format[i + 1] == 's')
 		{
 			str = va_arg(args, char *);
@@ -37,6 +45,6 @@ int _printf(const char *format, ...)
 }
 int main(void)
 {
-	_printf("%c %s", 'c', " four");
+	_printf("%cprint function %s", 'f', " four");
 	return 0;
 }
