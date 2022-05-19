@@ -1,50 +1,55 @@
 #include <stdio.h>
 #include <stdarg.h>
-#include <stdlib.h>
+#include "main.h"
 
 int _printf(const char *format, ...)
 {
 	va_list args;
 	char *str;
-	char charac;
-	int i, j, count = 0;
+	char chara;
+	int i, j;
 
-	//The count variable counts the number characters printed
+	/*The count variable counts the number characters printed*/
 	va_start(args, format);
 	
 	for (i = 0; format[i] != '\0'; i++)
 	{
-		// Prints characters not associated with format specifiers	
-		if (format[i] != '%' && format[i - 1] != '%')
+		if (format[i] != '%')
 		{
 			putchar(format[i]);
-			count++;
+			continue;
 		}
-		//Prints characters
-		if (format[i] == '%' && format[i + 1] == 'c')
+		if (format[i + 1] == '%')
 		{
-			charac = va_arg(args, int);
-			putchar(charac);
-			count++;
+			putchar(format[i]);
+			i++;
+			continue;
 		}
-		//Prints strings
-		else if (format[i] == '%' && format[i + 1] == 's')
+		if (format[i + 1] == 'c')
+		{
+			chara = va_arg(args, int);
+			putchar(chara);
+			i++;
+			continue;
+		}
+		if (format[i + 1] == 's')
 		{
 			str = va_arg(args, char *);
 			for (j = 0; str[j] != '\0'; j++)
-			{	
 				putchar(str[j]);
-				count++;
-			}
-
+			i++;
 		}
 	}
-	putchar('\n');
+
 	va_end(args);
-	return count;
-}
-int main(void)
-{
-	_printf("%cprint function %s", 'f', " four");
 	return 0;
 }
+
+
+
+/*
+int main(void)
+{
+	_printf("Negative:[%d]\n", -762534);
+	return 0;
+}*/
