@@ -9,7 +9,7 @@ int _printf(const char *format, ...)
 	char charac;
 	int i, j, count = 0;
 
-	//The count variables count the characters printed
+	//The count variable counts the number characters printed
 	va_start(args, format);
 	
 	for (i = 0; format[i] != '\0'; i++)
