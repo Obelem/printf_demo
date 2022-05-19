@@ -38,7 +38,9 @@ int _printf(const char *format, ...)
 			for (j = 0; str[j] != '\0'; j++)
 				putchar(str[j]);
 			i++;
+			continue;
 		}
+		putchar('%');
 	}
 
 	va_end(args);
